@@ -4,6 +4,7 @@ node_modules
 dist
 .output
 .nitro
+*.original.*
 *.log
 .node_modules.lock
 .env
