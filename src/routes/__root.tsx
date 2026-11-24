@@ -3,7 +3,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Misahye Studio";
+const APP_NAME = "MISHAYE STUDIO";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Misahye Studio — interior design and turnkey renovation. Quiet rooms, walnut, stone, and linen, composed from the first sketch to handover.",
+          "MISHAYE STUDIO — interior design and turnkey renovation. Quiet rooms, walnut, stone, and linen, composed from the first sketch to handover.",
       },
       { name: "theme-color", content: "#1c1814" },
     ],

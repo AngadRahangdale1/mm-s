@@ -4,9 +4,51 @@ import { EstimateDialog } from "@/components/site/estimate-dialog";
 
 const NAV = [
   { href: "#practice", label: "Practice" },
+  { href: "#values", label: "Core Values" },
   { href: "#work", label: "Work" },
-  { href: "#studio", label: "Studio" },
+  { href: "#studio", label: "Studio & Team" },
   { href: "#contact", label: "Contact" },
+];
+
+const CORE_VALUES = [
+  {
+    index: "01",
+    title: "People First",
+    copy: "We design around the people who live or work in the space.",
+  },
+  {
+    index: "02",
+    title: "Creativity with Purpose",
+    copy: "Fresh ideas that are both beautiful and practical.",
+  },
+  {
+    index: "03",
+    title: "Attention to Detail",
+    copy: "Every element matters, from the big picture to the finer details.",
+  },
+  {
+    index: "04",
+    title: "Material Authenticity",
+    copy: "Thoughtful selection of materials that add character and longevity.",
+  },
+  {
+    index: "05",
+    title: "Integrated Approach",
+    copy: "A seamless balance of design, technical planning and execution.",
+  },
+];
+
+const TEAM = [
+  {
+    name: "Monalisa Saha",
+    role: "CO-FOUNDER & CREATIVE DIRECTOR",
+    copy: "Leading spatial conceptualization, aesthetic direction, and bespoke interior identity.",
+  },
+  {
+    name: "Shazaib Akram",
+    role: "CO-FOUNDER & TECHNICAL DIRECTOR",
+    copy: "Directing architectural detailing, technical workflows, and turnkey on-site execution.",
+  },
 ];
 
 const SERVICES = [
@@ -169,7 +211,7 @@ export function Landing() {
             if (event.animationName === "iris") setPhase("done");
           }}
         >
-          <p className="eyebrow text-muted">Misahye Studio</p>
+          <p className="eyebrow text-muted">Mishaye Studio</p>
           <p className="mt-6 text-7xl font-medium tabular-nums tracking-tight md:text-8xl">{pct}%</p>
           <div className="mt-6 h-px w-40 bg-line" />
           <p className="eyebrow mt-5 text-muted">Composing the room</p>
@@ -191,8 +233,8 @@ export function Landing() {
         }
       >
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 md:px-8">
-          <a href="#top" className="text-base font-medium tracking-tight">
-            Misahye
+          <a href="#top" className="text-base font-semibold tracking-wider uppercase">
+            Mishaye Studio
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {NAV.map((item) => (
@@ -274,7 +316,7 @@ export function Landing() {
           <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-6 pb-20 pt-28 text-center md:pb-16">
             <p className="eyebrow">Interior design & turnkey renovation</p>
             <h1 className="wordmark mt-6">
-              <span className="block">Misahye</span>
+              <span className="block">Mishaye</span>
               <span className="block">Studio</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-cream/90">Creating interiors that settle.</p>
@@ -330,6 +372,31 @@ export function Landing() {
                 </article>
               </Reveal>
             ))}
+          </div>
+        </section>
+
+        <section id="values" className="scroll-mt-20 border-t border-line bg-paper py-24 md:py-32">
+          <div className="mx-auto max-w-6xl px-6 md:px-8">
+            <Reveal>
+              <p className="eyebrow text-muted">02 · Principles</p>
+              <h2 className="chapter mt-4 max-w-2xl">Our Core Values</h2>
+              <p className="mt-4 max-w-xl text-ink-soft">
+                Principles that guide every proportion, joint, and surface we shape.
+              </p>
+            </Reveal>
+            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-20">
+              {CORE_VALUES.map((val) => (
+                <Reveal key={val.index}>
+                  <div className="flex h-full flex-col justify-between rounded-2xl border border-line bg-cream/70 p-8 transition-colors hover:border-walnut/40">
+                    <div>
+                      <p className="eyebrow text-muted">№ {val.index}</p>
+                      <h3 className="mt-4 text-xl font-medium tracking-tight uppercase text-ink">{val.title}</h3>
+                      <p className="mt-3 text-ink-soft leading-relaxed">{val.copy}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -391,29 +458,49 @@ export function Landing() {
         </section>
 
         <section id="studio" className="scroll-mt-20 border-t border-line">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-2 md:gap-20 md:px-8 md:py-32">
-            <Reveal>
-              <p className="eyebrow text-muted">The studio</p>
-              <h2 className="chapter mt-4">A small practice for rooms that should feel already resolved.</h2>
-              <p className="mt-6 text-ink-soft">
-                Misahye takes few commissions at a time, so each one can be composed rather than
-                decorated. Proportion first, then light, then the surface you live with every day.
-              </p>
-              <p className="mt-4 text-ink-soft">
-                When you want one hand on the whole job, the same studio carries the renovation
-                through handover.
-              </p>
-              <dl className="mt-12 grid gap-8 sm:grid-cols-3">
-                <Stat value="64" label="Rooms composed" />
-                <Stat value="11" label="Years in practice" />
-                <Stat value="3" label="Disciplines, one studio" />
-              </dl>
-            </Reveal>
-            <img
-              src="/media/evening-room.jpg"
-              alt="Cream seating and a walnut wall in an evening living room"
-              className="aspect-[4/5] w-full object-cover"
-            />
+          <div className="mx-auto max-w-6xl px-6 py-24 md:px-8 md:py-32">
+            <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
+              <Reveal>
+                <p className="eyebrow text-muted">The studio</p>
+                <h2 className="chapter mt-4">A small practice for rooms that should feel already resolved.</h2>
+                <p className="mt-6 text-ink-soft">
+                  Mishaye takes few commissions at a time, so each one can be composed rather than
+                  decorated. Proportion first, then light, then the surface you live with every day.
+                </p>
+                <p className="mt-4 text-ink-soft">
+                  When you want one hand on the whole job, the same studio carries the renovation
+                  through handover.
+                </p>
+                <dl className="mt-12 grid gap-8 sm:grid-cols-3">
+                  <Stat value="64" label="Rooms composed" />
+                  <Stat value="11" label="Years in practice" />
+                  <Stat value="3" label="Disciplines, one studio" />
+                </dl>
+              </Reveal>
+              <img
+                src="/media/evening-room.jpg"
+                alt="Cream seating and a walnut wall in an evening living room"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
+
+            <div className="mt-20 border-t border-line pt-16 md:mt-28 md:pt-20">
+              <Reveal>
+                <p className="eyebrow text-muted">Leadership</p>
+                <h3 className="chapter mt-3">Our Team</h3>
+              </Reveal>
+              <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                {TEAM.map((member) => (
+                  <Reveal key={member.name}>
+                    <div className="rounded-2xl border border-line bg-cream/70 p-8 transition-colors hover:border-walnut/40">
+                      <p className="eyebrow text-walnut">{member.role}</p>
+                      <h4 className="mt-3 text-3xl font-medium tracking-tight text-ink">{member.name}</h4>
+                      <p className="mt-3 text-ink-soft">{member.copy}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -442,6 +529,36 @@ export function Landing() {
                   <ArrowRight className="size-4" aria-hidden />
                 </span>
               </button>
+
+              <div className="mt-12 border-t border-cream/20 pt-8 space-y-4 text-cream/90 text-sm">
+                <div>
+                  <p className="eyebrow text-cream/60">Our Location</p>
+                  <p className="mt-1 text-base font-medium">Delhi NCR, India</p>
+                </div>
+                <div>
+                  <p className="eyebrow text-cream/60">Contact Numbers</p>
+                  <div className="mt-1 flex flex-col gap-1 text-base">
+                    <a href="tel:+919205419042" className="hover:underline">+91 9205419042</a>
+                    <a href="tel:+918826981268" className="hover:underline">+91 8826981268</a>
+                  </div>
+                </div>
+                <div>
+                  <p className="eyebrow text-cream/60">Email</p>
+                  <p className="mt-1 text-base">
+                    <a href="mailto:mishaye.studio@gmail.com" className="hover:underline">mishaye.studio@gmail.com</a>
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-8 pt-1">
+                  <div>
+                    <p className="eyebrow text-cream/60">Website</p>
+                    <a href="https://www.mishayestudio.com" target="_blank" rel="noreferrer" className="mt-1 inline-block hover:underline text-base">www.mishayestudio.com</a>
+                  </div>
+                  <div>
+                    <p className="eyebrow text-cream/60">Instagram</p>
+                    <a href="https://instagram.com/mishaye.studio" target="_blank" rel="noreferrer" className="mt-1 inline-block hover:underline text-base">@mishaye.studio</a>
+                  </div>
+                </div>
+              </div>
             </div>
             {sent ? (
               <div className="flex items-end">
@@ -459,7 +576,7 @@ export function Landing() {
                     note: String(data.get("note") || ""),
                     at: new Date().toISOString(),
                   };
-                  const key = "misahye-notes";
+                  const key = "mishaye-notes";
                   let prev: unknown[] = [];
                   try {
                     const parsed = JSON.parse(localStorage.getItem(key) || "[]") as unknown;
@@ -512,12 +629,63 @@ export function Landing() {
       </main>
 
       <footer className="border-t border-line bg-paper">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:px-8">
-          <p>Misahye Studio</p>
-          <p>Interior design & turnkey renovation</p>
-          <a href="mailto:hello@misahye.studio" className="text-ink">
-            hello@misahye.studio
-          </a>
+        <div className="mx-auto max-w-6xl px-6 py-12 md:px-8">
+          <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+            <div>
+              <h4 className="text-lg font-medium tracking-tight uppercase text-ink">MISHAYE STUDIO</h4>
+              <p className="mt-2 text-sm text-ink-soft">
+                Interior design & turnkey renovation.
+              </p>
+              <p className="mt-2 text-xs text-muted">
+                Delhi NCR, India
+              </p>
+            </div>
+            <div>
+              <p className="eyebrow text-muted">Contact Numbers</p>
+              <div className="mt-3 flex flex-col gap-1 text-sm text-ink-soft">
+                <a href="tel:+919205419042" className="hover:text-ink hover:underline">
+                  +91 9205419042
+                </a>
+                <a href="tel:+918826981268" className="hover:text-ink hover:underline">
+                  +91 8826981268
+                </a>
+              </div>
+            </div>
+            <div>
+              <p className="eyebrow text-muted">Email & Web</p>
+              <div className="mt-3 flex flex-col gap-1 text-sm text-ink-soft">
+                <a href="mailto:mishaye.studio@gmail.com" className="hover:text-ink hover:underline">
+                  mishaye.studio@gmail.com
+                </a>
+                <a
+                  href="https://www.mishayestudio.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-ink hover:underline"
+                >
+                  www.mishayestudio.com
+                </a>
+              </div>
+            </div>
+            <div>
+              <p className="eyebrow text-muted">Instagram & Location</p>
+              <div className="mt-3 flex flex-col gap-1 text-sm text-ink-soft">
+                <a
+                  href="https://instagram.com/mishaye.studio"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-ink hover:underline"
+                >
+                  @mishaye.studio
+                </a>
+                <span className="text-muted">Delhi NCR, India</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-line pt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-xs text-muted">
+            <p>© {new Date().getFullYear()} MISHAYE STUDIO. All rights reserved.</p>
+            <p>Interior design & turnkey renovation</p>
+          </div>
         </div>
       </footer>
 

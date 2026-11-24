@@ -79,7 +79,7 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
       high: result.high,
       at: new Date().toISOString(),
     };
-    const key = "misahye-enquiries";
+    const key = "mishaye-enquiries";
     let prev: unknown[] = [];
     try {
       const parsed = JSON.parse(localStorage.getItem(key) || "[]") as unknown;
