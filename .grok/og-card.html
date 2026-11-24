@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Cormorant Garamond";
+        src: url("file:///workspace/.grok/fonts/CormorantGaramond.ttf") format("truetype");
+        font-weight: 300 700;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #f6f2ec;
+      }
+
+      body {
+        color: #1c1814;
+        font-family: "Cormorant Garamond", "Liberation Serif", serif;
+        position: relative;
+      }
+
+      .paper {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 78% 70% at 50% 46%, rgba(255, 252, 248, 0.9) 0%, rgba(246, 242, 236, 0) 62%),
+          radial-gradient(ellipse 90% 80% at 50% 120%, rgba(110, 75, 50, 0.09), transparent 55%),
+          #f6f2ec;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.11;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.43  0 0 0 0 0.29  0 0 0 0 0.2  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      }
+
+      .frame {
+        position: absolute;
+        inset: 28px;
+        border: 1px solid #6e4b32;
+        pointer-events: none;
+      }
+
+      .frame-inner {
+        position: absolute;
+        inset: 34px;
+        border: 1px solid #d8cfc3;
+        pointer-events: none;
+      }
+
+      .lockup {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-6px);
+      }
+
+      .elevation {
+        width: 248px;
+        height: 132px;
+        display: block;
+        margin-bottom: 18px;
+      }
+
+      .name {
+        font-weight: 500;
+        font-size: 168px;
+        line-height: 0.78;
+        letter-spacing: 0.012em;
+        color: #1c1814;
+        padding: 0 40px 10px;
+      }
+
+      .rule-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 22px 0 16px;
+      }
+
+      .rule {
+        width: 56px;
+        height: 1px;
+        background: #6e4b32;
+      }
+
+      .keystone {
+        width: 5px;
+        height: 5px;
+        background: #6e4b32;
+        transform: rotate(45deg);
+      }
+
+      .studio {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: 0.58em;
+        text-indent: 0.58em;
+        text-transform: uppercase;
+        color: #6e4b32;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+    <div class="grain"></div>
+    <div class="frame"></div>
+    <div class="frame-inner"></div>
+    <div class="lockup">
+      <svg class="elevation" viewBox="0 0 248 132" fill="none" aria-hidden="true">
+        <path d="M8 124 H240" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M46 124 V58" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M202 124 V58" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M46 58 A78 78 0 0 1 202 58" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M58 124 V64" stroke="#6e4b32" stroke-width="0.8" opacity="0.72" />
+        <path d="M190 124 V64" stroke="#6e4b32" stroke-width="0.8" opacity="0.72" />
+        <path d="M58 64 A66 66 0 0 1 190 64" stroke="#6e4b32" stroke-width="0.8" opacity="0.72" />
+        <path d="M120 6 V18" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M128 6 V18" stroke="#6e4b32" stroke-width="1.1" />
+        <path d="M120 6 H128" stroke="#6e4b32" stroke-width="1.1" />
+      </svg>
+      <div class="name" id="name">Misahye</div>
+      <div class="rule-row">
+        <div class="rule"></div>
+        <div class="keystone"></div>
+        <div class="rule"></div>
+      </div>
+      <div class="studio" id="studio">Studio</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Misahye Studio",
+      "hasCanvas": false,
+      "bodyTextLen": 1781,
+      "bodyTextHash": "2649cd593601eafd7cf30975abdfb6365ced78868aadbc9ce911f746933f8825",
+      "bodyTextPrefix": "MISAHYE STUDIO 0% COMPOSING THE ROOM SKIP Misahye Practice Work ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Misahye Studio",
+      "hasCanvas": false,
+      "bodyTextLen": 1744,
+      "bodyTextHash": "e598f77645bfa22a7503d9603f6dfb64ac91623d929162dcea793b349ef932db",
+      "bodyTextPrefix": "MISAHYE STUDIO 62% COMPOSING THE ROOM SKIP Misahye INTERIOR DESI",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

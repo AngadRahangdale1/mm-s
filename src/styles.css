@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  --color-ink: #1c1814;
+  --color-ink-soft: #3f372f;
+  --color-muted: #7a7168;
+  --color-line: #e3dbd1;
+  --color-paper: #f6f2ec;
+  --color-paper-deep: #ebe4da;
+  --color-cream: #fbf8f4;
+  --color-walnut: #6e4b32;
+  --color-stone: #d8cfc3;
+
+  --radius-pill: 999px;
+}
+
+@utility wordmark {
+  font-size: clamp(4.25rem, 12vw, 8.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+}
+
+@utility display {
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+}
+
+@utility chapter {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+@utility work-card {
+  width: min(86vw, 62rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-walnut);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-walnut);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.intro-out {
+  animation: iris 0.9s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+@keyframes iris {
+  from {
+    clip-path: circle(150% at 50% 46%);
+  }
+  to {
+    clip-path: circle(0% at 50% 46%);
+  }
+}
+
+.hero-veil {
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--color-ink) 62%, transparent), transparent 46%),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 48%, transparent), transparent 34%),
+    color-mix(in srgb, var(--color-ink) 34%, transparent);
+}
+
+.work-row {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-stone) transparent;
+}
+
+.field {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-cream) 35%, transparent);
+  background: transparent;
+  padding: 0.9rem 0;
+  color: var(--color-cream);
+  font: inherit;
+}
+
+.field::placeholder {
+  color: color-mix(in srgb, var(--color-cream) 55%, transparent);
+}
+
+.field-ink {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  background: transparent;
+  padding: 0.9rem 0;
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.field-ink::placeholder {
+  color: var(--color-muted);
+}
+
+input[type="range"] {
+  accent-color: var(--color-ink);
+  width: 100%;
+  height: 2.75rem;
+}

@@ -1,0 +1,11 @@
+node_modules
+.tanstack
+.vercel
+dist
+.output
+.nitro
+*.log
+.node_modules.lock
+.env
+.env.*
+!.env.example
