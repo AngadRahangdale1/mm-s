@@ -125,6 +125,7 @@ export function Landing() {
   const [menu, setMenu] = useState(false);
   const [estimate, setEstimate] = useState(false);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const workRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const skipped = useRef(false);
@@ -179,7 +180,7 @@ export function Landing() {
       video.pause();
       return;
     }
-    video.play().catch(() => {});
+    video.play().catch(() => { });
   }, [phase]);
 
   useEffect(() => {
@@ -567,7 +568,7 @@ export function Landing() {
             ) : (
               <form
                 className="flex flex-col justify-end"
-                onSubmit={(event) => {
+                onSubmit={async (event) => {
                   event.preventDefault();
                   const data = new FormData(event.currentTarget);
                   const entry = {
@@ -585,7 +586,32 @@ export function Landing() {
                     prev = [];
                   }
                   localStorage.setItem(key, JSON.stringify([entry, ...prev].slice(0, 20)));
-                  setSent(true);
+
+                  setSubmitting(true);
+                  try {
+                    const res = await fetch("https://api.web3forms.com/submit", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                      },
+                      body: JSON.stringify({
+                        access_key: "9b223c12-7628-4ec7-b90b-2add39846fe2",
+                        name: entry.name,
+                        email: entry.email,
+                        message: entry.note,
+                        from_name: "Mishaye Studio Website",
+                        subject: `New Project Inquiry from ${entry.name} - MISHAYE STUDIO`,
+                      }),
+                    });
+                    const data = await res.json();
+                    console.log("Web3Forms response:", data);
+                  } catch (err) {
+                    console.error("Web3Forms submission error:", err);
+                  } finally {
+                    setSubmitting(false);
+                    setSent(true);
+                  }
                 }}
               >
                 <label>
@@ -615,9 +641,10 @@ export function Landing() {
                 </label>
                 <button
                   type="submit"
-                  className="mt-8 inline-flex w-fit items-center gap-3 rounded-full bg-cream py-2 pl-5 pr-2 text-ink"
+                  disabled={submitting}
+                  className="mt-8 inline-flex w-fit items-center gap-3 rounded-full bg-cream py-2 pl-5 pr-2 text-ink disabled:opacity-70"
                 >
-                  <span className="eyebrow">Start a project</span>
+                  <span className="eyebrow">{submitting ? "Sending..." : "Start a project"}</span>
                   <span className="grid size-11 place-items-center rounded-full bg-ink text-cream">
                     <ArrowRight className="size-4" aria-hidden />
                   </span>

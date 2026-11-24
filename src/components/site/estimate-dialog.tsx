@@ -45,6 +45,7 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function reset() {
     setStep(0);
@@ -55,6 +56,7 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
     setName("");
     setEmail("");
     setSent(false);
+    setSubmitting(false);
   }
 
   function close(next: boolean) {
@@ -65,7 +67,7 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
   const ready = room && scope && finish;
   const result = ready ? composeEstimate({ room, scope, finish, area } satisfies EstimateInput) : null;
 
-  function send(event: React.FormEvent) {
+  async function send(event: React.FormEvent) {
     event.preventDefault();
     if (!ready || !result) return;
     const entry = {
@@ -88,7 +90,35 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
       prev = [];
     }
     localStorage.setItem(key, JSON.stringify([entry, ...prev].slice(0, 20)));
-    setSent(true);
+
+    setSubmitting(true);
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "9b223c12-7628-4ec7-b90b-2add39846fe2",
+          name,
+          email,
+          room_type: ROOM_LABEL[room],
+          project_scope: SCOPE_LABEL[scope],
+          selected_finish: FINISH_LABEL[finish],
+          area_sq_ft: `${area.toLocaleString()} sq ft`,
+          estimated_cost: `${money(result.low)} – ${money(result.high)}`,
+          estimated_timeline: result.weeks,
+          from_name: "Mishaye Studio Cost Estimator",
+          subject: `New Project Estimate Inquiry from ${name} - MISHAYE STUDIO`,
+        }),
+      });
+    } catch (err) {
+      console.error("Web3Forms estimate submission error:", err);
+    } finally {
+      setSubmitting(false);
+      setSent(true);
+    }
   }
 
   return (
@@ -275,9 +305,10 @@ export function EstimateDialog({ open, onOpenChange }: Props) {
                       </label>
                       <button
                         type="submit"
-                        className="mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-ink py-2 pl-5 pr-2 text-cream"
+                        disabled={submitting}
+                        className="mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-ink py-2 pl-5 pr-2 text-cream disabled:opacity-70"
                       >
-                        <span className="eyebrow">Send to the studio</span>
+                        <span className="eyebrow">{submitting ? "Sending..." : "Send to the studio"}</span>
                         <span className="grid size-11 place-items-center rounded-full bg-cream text-ink">
                           <ArrowRight className="size-4" aria-hidden />
                         </span>
