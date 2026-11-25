@@ -128,6 +128,7 @@ export function Landing() {
   const [submitting, setSubmitting] = useState(false);
   const workRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const signatureVideoRef = useRef<HTMLVideoElement>(null);
   const skipped = useRef(false);
 
   function dismissIntro() {
@@ -174,13 +175,16 @@ export function Landing() {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || phase !== "done") return;
+    const signatureVideo = signatureVideoRef.current;
+    if (phase !== "done") return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      video.pause();
+      video?.pause();
+      signatureVideo?.pause();
       return;
     }
-    video.play().catch(() => { });
+    video?.play().catch(() => { });
+    signatureVideo?.play().catch(() => { });
   }, [phase]);
 
   useEffect(() => {
@@ -229,13 +233,41 @@ export function Landing() {
       <header
         className={
           solid || menu
-            ? "fixed inset-x-0 top-0 z-40 border-b border-line bg-paper text-ink"
-            : "fixed inset-x-0 top-0 z-40 text-cream"
+            ? "fixed inset-x-0 top-0 z-40 border-b border-line bg-paper text-ink transition-colors duration-300"
+            : "fixed inset-x-0 top-0 z-40 text-cream transition-colors duration-300"
         }
       >
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 md:px-8">
-          <a href="#top" className="text-base font-semibold tracking-wider uppercase">
-            Mishaye Studio
+          <a href="#top" className="inline-flex items-center gap-2.5 sm:gap-3">
+            <span className="relative block h-7 w-9 shrink-0 sm:h-8 sm:w-10">
+              <img
+                src="/media/brand-mark-cream.png"
+                alt=""
+                width={330}
+                height={256}
+                aria-hidden
+                className={
+                  solid || menu
+                    ? "absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-300"
+                    : "absolute inset-0 h-full w-full object-contain opacity-100 transition-opacity duration-300"
+                }
+              />
+              <img
+                src="/media/brand-mark-ink.png"
+                alt=""
+                width={330}
+                height={256}
+                aria-hidden
+                className={
+                  solid || menu
+                    ? "absolute inset-0 h-full w-full object-contain opacity-100 transition-opacity duration-300"
+                    : "absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-300"
+                }
+              />
+            </span>
+            <span className="text-sm font-semibold tracking-wider uppercase sm:text-base">
+              Mishaye Studio
+            </span>
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {NAV.map((item) => (
@@ -502,6 +534,56 @@ export function Landing() {
                 ))}
               </div>
             </div>
+
+            <div className="mt-20 border-t border-line pt-16 md:mt-28 md:pt-24">
+              <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
+                <Reveal className="md:col-span-5">
+                  <div className="mx-auto max-w-sm md:mx-0">
+                    <div className="aspect-[4/5] w-full overflow-hidden border border-line bg-travertine">
+                      <video
+                        ref={signatureVideoRef}
+                        src="/media/studio-signature.mp4"
+                        poster="/media/studio-signature-poster.jpg"
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-label="Mishaye Studio animated identity mark"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="mt-3 flex items-center justify-between text-muted">
+                      <span className="eyebrow">Atelier Mark</span>
+                      <span className="text-xs">Monograph · Delhi NCR</span>
+                    </div>
+                  </div>
+                </Reveal>
+                <Reveal className="md:col-span-7">
+                  <p className="eyebrow text-muted">Studio signature</p>
+                  <h3 className="chapter mt-4 max-w-xl">
+                    Spaces composed to hold stillness long after handover.
+                  </h3>
+                  <p className="mt-5 max-w-lg text-ink-soft">
+                    Every Mishaye commission carries one unbroken standard — from measured elevation
+                    and bespoke millwork to the quiet finality of how morning light meets stone.
+                  </p>
+                  <dl className="mt-10 divide-y divide-line border-y border-line">
+                    <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                      <dt className="eyebrow text-muted">Identity</dt>
+                      <dd className="text-sm text-ink-soft">Bespoke residential & commercial interiors</dd>
+                    </div>
+                    <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                      <dt className="eyebrow text-muted">Delivery</dt>
+                      <dd className="text-sm text-ink-soft">Design, technical detailing & turnkey handover</dd>
+                    </div>
+                    <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                      <dt className="eyebrow text-muted">Studio</dt>
+                      <dd className="text-sm text-ink-soft">Delhi NCR · Visits by appointment</dd>
+                    </div>
+                  </dl>
+                </Reveal>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -659,8 +741,20 @@ export function Landing() {
         <div className="mx-auto max-w-6xl px-6 py-12 md:px-8">
           <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
             <div>
-              <h4 className="text-lg font-medium tracking-tight uppercase text-ink">MISHAYE STUDIO</h4>
-              <p className="mt-2 text-sm text-ink-soft">
+              <a href="#top" className="inline-flex items-center gap-3">
+                <img
+                  src="/media/brand-mark-ink.png"
+                  alt=""
+                  width={330}
+                  height={256}
+                  aria-hidden
+                  className="h-9 w-auto shrink-0 object-contain"
+                />
+                <span className="text-lg font-medium tracking-tight uppercase text-ink">
+                  MISHAYE STUDIO
+                </span>
+              </a>
+              <p className="mt-3 text-sm text-ink-soft">
                 Interior design & turnkey renovation.
               </p>
               <p className="mt-2 text-xs text-muted">
